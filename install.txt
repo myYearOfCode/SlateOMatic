@@ -1,0 +1,7 @@
+install imagemagick and graphicsmagick
+  brew install imagemagick
+  brew install graphicsmagick
+then install gm
+  npm install gm
+then install ghostscript
+  brew install ghostscript
