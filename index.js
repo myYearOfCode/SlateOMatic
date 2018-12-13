@@ -2,9 +2,21 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+//// TODO:
+// make a form to input the data
+  // make a layout that has a sidepane with the form, a preview of the slate
+  // and a download button.
+// make a few image/layout templates
+// think about charging and pricing
+  // excel upload, batch download (zipped) and ability to update old slates
+  // are premium features
+// daily limit? probably not.
+
+
 
 // serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'slates')));
 
 // an api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {
@@ -13,11 +25,17 @@ app.get('/api/getList', (req,res) => {
   console.log('sent list of items');
 });
 
+app.get('/form',(req,res) => {
+  res.sendFile(path.join(__dirname+'/form.html'));
+})
+
 app.get('/draw*', (req,res) => {
-//http://localhost:5000/draw?client=hill%20of%20beans&agency=none&isci=fna200009182&length=3:00&title=No%20Bad%20Days&date=20181212
-  draw(req.query)
+// http://localhost:5000/draw?client=hill%20of%20beans&agency=none&isci=fna200009182&runtime=3:00&title=No%20Bad%20Days&date=20181212
+  // draw(req.query)
   console.log(req.query);
-  res.send(req.query);
+  // res.send(req.query);
+  let filepath=draw(req.query);
+  setTimeout( () => {res.sendFile(filepath)},1000);
 });
 
 // handles any requests that don't match the ones above
@@ -36,11 +54,6 @@ var fs = require('fs')
 
 console.log('hello')
 
-// this is currently very silly and just runs once on server start.
-// this should be sent to an endpoint somewhere and maybe even displayed on the web
-// that would possibly be less hacky.
-
-
 let draw = (query) => {
   let client = query.client || ""
   let agency = query.agency || ""
@@ -48,6 +61,7 @@ let draw = (query) => {
   let isci = query.isci || ""
   let runtime = query.runtime || ""
   let date = query.date || ""
+  let filename = (__dirname + `/slates/${isci}.png`)
   gm( __dirname + '/test/Black.png')
     // .blur(8, 4)
     .fontSize(30)
@@ -70,9 +84,12 @@ let draw = (query) => {
     .drawText(1002, 646, "runtime:")
     .drawText(1002, 700, "isci:")
     .noProfile()
-    .write(__dirname + '/test/text.png', function text (err) {
+    // check for previous versions of slate here.
+    // what to do if they exist?
+    .write(filename, function text (err) {
       if (err) console.log(err);
     })
+    return filename
 }
-console.log('hello')
+
 //
