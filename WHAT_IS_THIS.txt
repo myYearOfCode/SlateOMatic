@@ -1,9 +1,11 @@
 this is a bare bones example of how to run express as an api server and router
 and also run react as a front end page renderer (and router)
 
-both parts need their own server running. cd into the build and root directories
+both parts need their own server running. cd into the build directory
 and run
 "npm start"
+the root directory runs with
+"nodemon" in order to reload on every source file save
 
 one will run (React) on port 3000 and the other (express) on 5000
 

@@ -55,6 +55,7 @@ var fs = require('fs')
 console.log('hello')
 
 let draw = (query) => {
+  
   let client = query.client || ""
   let agency = query.agency || ""
   let title = query.title || ""
