@@ -15,8 +15,11 @@ const app = express();
 
 
 // serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 app.use(express.static(path.join(__dirname, 'slates')));
+app.use(express.static(path.join(__dirname, 'style')));
+
+console.log(path.join(__dirname, 'style'));
 
 // an api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {
@@ -55,7 +58,7 @@ var fs = require('fs')
 console.log('hello')
 
 let draw = (query) => {
-  
+
   let client = query.client || ""
   let agency = query.agency || ""
   let title = query.title || ""

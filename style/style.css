@@ -1,17 +1,32 @@
-.formElement{
-  float: auto;
-  margin: 0 auto;
-  padding: 20px;
+.container {
+  display: flex;
+  height:100vh;
+  align-content: center;
+  flex-wrap:wrap;
 }
 
-.form_body{
-  padding-left: 10px;
-  padding-top: 10px;
-  background-color: powderblue;
+.box {
+  width:25vw;
+
+}
+.box2 {
+  width:50vw;
 }
 
-div {
-  height: 200px;
-  width: 50%;
-  background-color: powderblue;
+.form_body {
+  /* width:60vw; */
+  padding:20px;
+  border:1px solid #e6e6e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1)
+}
+
+.formElement {
+  border-radius:4px;
+  padding:5px;
+  /* border:5px; */
+}
+
+.formDiv {
+  padding:10px;
 }
